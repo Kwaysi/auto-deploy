@@ -1,9 +1,9 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import { Models, RepoInstance } from '../../types';
+import { Models, DeployInstance } from '../../types';
 
-export default function repoModel(sequelize: Sequelize) {
-	const repos = sequelize.define<RepoInstance>(
-		'repos',
+export default function deployModel(sequelize: Sequelize) {
+	const deploys = sequelize.define<DeployInstance>(
+		'deploys',
 		{
 			id: {
 				unique: true,
@@ -17,25 +17,19 @@ export default function repoModel(sequelize: Sequelize) {
 					}
 				}
 			},
-			name: {
-				allowNull: false,
+			log: {
 				type: DataTypes.STRING
 			},
-			path: {
-				allowNull: false,
+			status: {
 				type: DataTypes.STRING
 			},
 			version: {
-				allowNull: false,
 				type: DataTypes.STRING
 			},
-			deployCommands: {
+			repoId: {
 				allowNull: false,
-				type: DataTypes.STRING
-			},
-			lastDeploy: {
-				allowNull: false,
-				type: DataTypes.DATE
+				type: DataTypes.UUID,
+				references: { model: 'repos', key: 'id' }
 			},
 			createdAt: {
 				allowNull: false,
@@ -60,10 +54,11 @@ export default function repoModel(sequelize: Sequelize) {
 	 * The `models/index` file will call this method automatically.
 	 */
 	// @ts-ignore
-	repos.associate = (models: Models) => {
+	deploys.associate = (models: Models) => {
 		// associations can be defined here
-		models.repos.hasMany(models.deploys);
+		// e.g models.user.hasMany(models.accounts);
+		models.deploys.belongsTo(models.repos);
 	};
 
-	return repos;
+	return deploys;
 }

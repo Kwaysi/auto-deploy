@@ -8,13 +8,7 @@ module.exports = {
 					unique: true,
 					primaryKey: true,
 					type: Sequelize.UUID,
-					defaultValue: Sequelize.UUIDV4,
-					validate: {
-						isUUID: {
-							args: 4,
-							msg: 'id must be uuid'
-						}
-					}
+					defaultValue: Sequelize.UUIDV4
 				},
 				log: {
 					type: Sequelize.STRING

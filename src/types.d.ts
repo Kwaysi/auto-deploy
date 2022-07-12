@@ -1,4 +1,4 @@
-import { ModelCtor, Optional } from 'sequelize/types';
+import { Model, ModelCtor, Optional } from 'sequelize/types';
 
 interface DefaultAttributes {
 	id: string;
@@ -18,6 +18,10 @@ export interface Repo extends DefaultAttributes {
 export interface RepoCreationAttributes
 	extends Optional<Repo, keyof DefaultAttributes> {}
 
+export interface RepoInstance
+	extends Model<Repo, RepoCreationAttributes>,
+		Repo {}
+
 export interface Deploy extends DefaultAttributes {
 	log: string;
 	repoId: string;
@@ -25,8 +29,12 @@ export interface Deploy extends DefaultAttributes {
 	version: string;
 }
 
-interface DeployCreationAttributes
+export interface DeployCreationAttributes
 	extends Optional<Deploy, keyof DefaultAttributes> {}
+
+export interface DeployInstance
+	extends Model<Deploy, DeployCreationAttributes>,
+		Deploy {}
 
 type Models = {
 	[key: string]: ModelCtor<any>;
