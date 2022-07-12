@@ -1,0 +1,22 @@
+{
+	"files": ["./src/index.ts"],
+	"compilerOptions": {
+		"baseUrl": "./",
+		"allowJs": true,
+		"strict": false,
+		"outDir": "build",
+		"target": "ESNext",
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "node",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"forceConsistentCasingInFileNames": true
+	},
+	"ts-node": {
+		"esm": true
+	},
+	"exclude": ["node_modules", "build"]
+}
