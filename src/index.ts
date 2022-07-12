@@ -2,8 +2,9 @@ import './env';
 import morgan from 'morgan';
 import express from 'express';
 
+import routes from './modules';
 import db from './database/models';
-import { authenticate } from './modules/common/utils';
+import { errorHandler } from './modules/common/utils';
 
 const {
 	PORT = 1445,
@@ -21,8 +22,8 @@ app.use(
 	morgan(morganConfig),
 	express.urlencoded({ extended: true, limit: '10mb' }),
 	express.json({ limit: '10mb' }),
-	authenticate,
-	() => {}
+	routes,
+	errorHandler
 );
 
 db.sequelize
